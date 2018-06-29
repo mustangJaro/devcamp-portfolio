@@ -18,5 +18,5 @@ end
 ```
 
 ```javascript
-alert "hello ther"
+alert "hello there"
 ```
