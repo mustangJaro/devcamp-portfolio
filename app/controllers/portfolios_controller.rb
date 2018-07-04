@@ -41,10 +41,15 @@ class PortfoliosController < ApplicationController
   end
 
   def destroy
+    # Perform the lookup
     @portfolio_item = Portfolio.find(params[:id])
+
+    # delete the record
     @portfolio_item.destroy
+
+    # redirect
     respond_to do |format|
-      format.html { redirect_to portfolios_url, notice: 'Portfolio item was successfully destroyed.' }
+      format.html { redirect_to portfolios_url, notice: 'Record was removed.' }
     end
   end
 end
