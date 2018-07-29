@@ -16,4 +16,8 @@ module ApplicationHelper
       content_tag(:p, greeting, class: "source-greeting")
     end
   end
+
+  def copyright_generator
+    JarlinkViewTool::Renderer.copyright 'AJ Jaro', 'All rights reserved'
+  end
 end
