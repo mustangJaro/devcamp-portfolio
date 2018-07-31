@@ -1,4 +1,8 @@
 
+<% if params[:page].present? %>
+	<%= paginate @blogs %>
+<% end %>
+
 <%= render @blogs %>
 
 <%= paginate @blogs %>
