@@ -6,7 +6,7 @@ class PortfoliosController < ApplicationController
          site_admin: :all
 
   def index
-    @portfolio_items = Portfolio.order("position ASC")
+    @portfolio_items = Portfolio.by_position
   end
 
   def angular
