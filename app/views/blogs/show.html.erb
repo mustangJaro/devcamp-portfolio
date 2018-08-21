@@ -1,5 +1,5 @@
 <h2><%= @blog.title %></h2>
-<%= link_to 'Edit', edit_blog_path(@blog) if logged_in?(:site_admin) %>
+<%= render partial: "metadata", locals: {blog: @blog} %>
 <p>
   <%= @blog.body %>
 </p>
