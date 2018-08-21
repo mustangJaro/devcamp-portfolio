@@ -6,3 +6,6 @@
 		<%= link_to 'Delete Post', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
 	</p>
 <% end %>
+<p>
+	<%= blog.topic.title if blog.topic %>
+</p>
