@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:edit, :update, :destroy, :toggle_status]
+  before_action :set_sidebar_topics, except: [:create, :update, :destroy, :toggle_status]
   layout "blog"
   access all: [:show, :index], 
          user: {except: [:destroy, :new, :create, :update, :edit, :toggle_status]}, 
@@ -99,6 +100,10 @@ class BlogsController < ApplicationController
   end
 
   private
+  
+    def set_sidebar_topics
+      @side_bar_topics = Topic.with_blogs
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
       @blog = Blog.friendly.find(params[:id])
