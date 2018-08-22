@@ -5,6 +5,13 @@ class BlogsController < ApplicationController
          user: {except: [:destroy, :new, :create, :update, :edit, :toggle_status]}, 
          site_admin: :all
 
+  def blogs_by_topic
+    @blogs = Blog.where(topic_id: params[:id]).published_paginated(params[:page])
+    @topic = Topic.find(params[:id])
+    render :index
+    @page_title = "My Portfolio Blog"
+  end
+
   # GET /blogs
   # GET /blogs.json
   def index

@@ -7,5 +7,5 @@
 	</p>
 <% end %>
 <p>
-	<%= blog.topic.title if blog.topic %>
+	<%= link_to blog.topic.title, topic_show_path(blog.topic.id) if blog.topic %>
 </p>

@@ -2,7 +2,9 @@
 <% if params[:page].present? %>
 	<%= paginate @blogs %>
 <% end %>
-
+<h1>
+	<%= @topic.title if params[:id] %>
+</h1>
 <%= render @blogs %>
 
 <%= paginate @blogs %>
