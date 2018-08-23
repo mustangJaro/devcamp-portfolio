@@ -1,7 +1,7 @@
 <h2><%= @blog.title %></h2>
 <%= render partial: "metadata", locals: {blog: @blog} %>
 <p>
-  <%= @blog.body %>
+  <%= markdown @blog.body %>
 </p>
 
 <%= render 'comments/comment_form' %>
