@@ -1,9 +1,12 @@
 <div class="blog-post">
 	<% if blog_counter == 0 && params[:page].nil? %>
 		<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-		  <div class="col-md-6 px-0">
+		  <div class="px-0">
 		    <h1 class="display-4 font-italic"><%= blog.title %></h1>
-		    <p class="blog-post-meta">Published <%= distance_of_time_in_words(blog.created_at, Time.now) %> ago</p>
+		    <p class="blog-post-meta">
+		    	Published <%= distance_of_time_in_words(blog.created_at, Time.now) %> ago
+    			<%= render partial: "admin_actions", locals: {blog: blog} %>
+		    </p>
 		    <p class="lead my-3"><%= blog.body[0..130] %>...</p>
 		    <p class="lead mb-0">
 		    	<%= link_to "Continue reading...", blog, class: "text-white font-weight-bold" %>
@@ -12,8 +15,10 @@
 		</div>
 	<% else %>
 		<h2><%= link_to blog.title, blog, class: "blog-post-title" %></h2>
-    <p class="blog-post-meta">Published <%= distance_of_time_in_words(blog.created_at, Time.now) %> ago</p>
-
+    <p class="blog-post-meta">
+    	Published <%= distance_of_time_in_words(blog.created_at, Time.now) %> ago
+    	<%= render partial: "admin_actions", locals: {blog: blog} %>
+    </p>
 		<p><%= blog.body %></p>
 	<% end %>
 
