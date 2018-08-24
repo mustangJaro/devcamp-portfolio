@@ -1,7 +1,19 @@
+
 <h2><%= @blog.title %></h2>
-<%= link_to 'Edit', edit_blog_path(@blog) if logged_in?(:site_admin) %>
+
+<p class="blog-post-meta">Published <%= distance_of_time_in_words(@blog.created_at, Time.now) %> ago</p>
+
+<nav class="breadcrumb blog">
+    <%= link_to "Home", root_path, class: "breadcrumb-item" %>
+		<%= link_to @blog.topic.title, topic_show_path(@blog.topic.id), class: "breadcrumb-item" if @blog.topic %>
+		<span class="breadcrumb-item active"><%= @blog.title %></span>
+
+
+  	<%= render partial: "admin_actions", locals: {blog: @blog} %>
+</nav>
+
 <p>
-  <%= @blog.body %>
+  <%= markdown @blog.body %>
 </p>
 
 <%= render 'comments/comment_form' %>

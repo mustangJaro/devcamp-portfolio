@@ -2,6 +2,12 @@
 @import "font-awesome";
 @import "gritter";
 
+html,
+body {
+  height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+
 /* stylelint-disable selector-list-comma-newline-after */
 
 .blog-header {
@@ -19,7 +25,7 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 .display-4 {
@@ -147,4 +153,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .comment-name {
   font-weight: 700;
+}
+
+.breadcrumb.blog {
+  display: block;
+}
+
+.blogcrumb a{
+  font-size: 1.5em;
+  margin-left: 10px;
+}
+
+.blog-nav {
+  margin-bottom: 30px;
 }

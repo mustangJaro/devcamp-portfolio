@@ -1,14 +1,27 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:edit, :update, :destroy, :toggle_status]
+  before_action :set_sidebar_topics, except: [:create, :update, :destroy, :toggle_status]
   layout "blog"
   access all: [:show, :index], 
          user: {except: [:destroy, :new, :create, :update, :edit, :toggle_status]}, 
          site_admin: :all
 
+  def blogs_by_topic
+    @blogs = Blog.where(topic_id: params[:id]).published_paginated(params[:page])
+    @topic = Topic.find(params[:id])
+    render :index
+    @page_title = "My Portfolio Blog"
+  end
+
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.page(params[:page]).per(5)
+    if logged_in?(:site_admin)
+      @blogs = Blog.all_paginated(params[:page])
+    else
+      @blogs = Blog.published_paginated(params[:page])
+    end
+
     @page_title = "My Portfolio Blog"
   end
 
@@ -16,10 +29,14 @@ class BlogsController < ApplicationController
   # GET /blogs/1.json
   def show
     @blog = Blog.includes(:comments).friendly.find(params[:id])
-    @comment = Comment.new
+    if logged_in?(:site_admin) || @blog.published?
+      @comment = Comment.new
 
-    @page_title = @blog.title
-    @seo_keywords = @blog.body
+      @page_title = @blog.title
+      @seo_keywords = @blog.body
+    else
+      redirect_to blogs_path, notice: "You are not authorized to access this page"
+    end
   end
 
   # GET /blogs/new
@@ -83,6 +100,10 @@ class BlogsController < ApplicationController
   end
 
   private
+  
+    def set_sidebar_topics
+      @side_bar_topics = Topic.with_blogs
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
       @blog = Blog.friendly.find(params[:id])
@@ -90,6 +111,6 @@ class BlogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.require(:blog).permit(:title, :body)
+      params.require(:blog).permit(:title, :body, :topic_id, :status)
     end
 end
