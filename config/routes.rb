@@ -10,16 +10,16 @@ Rails.application.routes.draw do
   get 'contact', to: 'pages#contact'
   get 'tech-news', to: 'pages#tech_news'
 
-  get 'topics', to: 'topics#index'
-  get 'topics/:id', to: 'blogs#blogs_by_topic', as: 'topic_show'
+  # get 'topics', to: 'topics#index'
+  # get 'topics/:id', to: 'blogs#blogs_by_topic', as: 'topic_show'
 
-  resources :blogs do
-    member do
-    	get :toggle_status
-    end
-  end
+  # resources :blogs do
+  #   member do
+  #   	get :toggle_status
+  #   end
+  # end
 
-  mount ActionCable.server => '/cable'
+  # mount ActionCable.server => '/cable'
 
   root to: 'pages#home'
 end
