@@ -1,7 +1,7 @@
 ready = ->
 	new Typed '.element',
 		stringsElement: '#typed-strings',
-		typeSpeed: 30
+		typeSpeed: 45
 	return
 
 
